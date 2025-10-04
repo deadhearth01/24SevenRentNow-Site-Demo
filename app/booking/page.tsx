@@ -16,6 +16,8 @@ function BookingContent() {
   const [selectedCar, setSelectedCar] = useState(cars[0]);
   
   const [formData, setFormData] = useState({
+    name: '',
+    email: '',
     phone: '',
   });
 
@@ -24,9 +26,6 @@ function BookingContent() {
     returnLocation: searchParams.get('returnLocation') || 'Hollywood-Nextcar/Priceless/Flexways',
     pickupDate: searchParams.get('pickupDate') || '2025-10-06T08:07',
     returnDate: searchParams.get('returnDate') || '2025-10-07T08:07',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
   });
 
   const [loading, setLoading] = useState(false);
@@ -48,6 +47,16 @@ function BookingContent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.name || formData.name.trim() === '') {
+      alert('Please enter your name');
+      return;
+    }
+    
+    if (!formData.email || formData.email.trim() === '') {
+      alert('Please enter your email');
+      return;
+    }
     
     if (!formData.phone || formData.phone.trim() === '') {
       alert('Please enter your phone number');
@@ -153,44 +162,35 @@ function BookingContent() {
                     {/* Demo Data Display */}
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                       <p className="text-sm text-blue-800">
-                        <strong>Demo Mode:</strong> Most fields are pre-filled. Only enter your phone number to receive WhatsApp confirmation.
+                        <strong>Demo Mode:</strong> Pickup/return locations and dates are pre-filled. Enter your details to receive WhatsApp confirmation.
                       </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          First Name
-                        </label>
-                        <input
-                          type="text"
-                          value={bookingDetails.firstName}
-                          disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Last Name
-                        </label>
-                        <input
-                          type="text"
-                          value={bookingDetails.lastName}
-                          disabled
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50"
-                        />
-                      </div>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address
+                        Your Name * <span className="text-orange-500">(Required for WhatsApp confirmation)</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-2 border-2 border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        placeholder="Enter your full name"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address *
                       </label>
                       <input
                         type="email"
-                        value={bookingDetails.email}
-                        disabled
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-2 border-2 border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        placeholder="your.email@example.com"
                       />
                     </div>
 
@@ -204,7 +204,7 @@ function BookingContent() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-4 py-2 border-2 border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                        placeholder="+1 (555) 000-0000 or 918688212827"
+                        placeholder="+1 (555) 000-0000"
                       />
                       <p className="text-xs text-gray-500 mt-1">Include country code (e.g., +1 for US, 91 for India)</p>
                     </div>

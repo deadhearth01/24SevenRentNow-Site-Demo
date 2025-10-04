@@ -25,8 +25,8 @@ export async function POST(request: Request) {
             broadcast_name: `booking_${bookingId}`,
             parameters: [
               {
-                name: "1",
-                value: bookingId
+                name: "CustomerName",
+                value: bookingData.name || "Customer"
               }
             ],
             channel_number: process.env.WATI_CHANNEL_NUMBER

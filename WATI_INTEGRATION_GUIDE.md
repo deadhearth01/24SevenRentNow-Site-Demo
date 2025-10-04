@@ -13,17 +13,17 @@ This is a complete clone of the 24sevenrentnow.com car rental website with integ
 
 ### 2. **WATI WhatsApp Integration**
    - Configured with your WATI credentials
-   - Uses your `confirmbooking` template
+   - Uses your `confirmbooking_video` template
    - Sends booking confirmation with generated booking ID
    - Format: BK######  (e.g., BK789456)
 
 ### 3. **Environment Configuration**
    The `.env.local` file contains your WATI credentials:
    ```
-   WATI_API_URL=https://live-mt-server.wati.io/1027960/api/v1/sendTemplateMessage
-   WATI_AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-   WATI_CHANNEL_NUMBER=16056050919
-   WATI_TEMPLATE_NAME=confirmbooking
+   WATI_API_URL=https://live-mt-server.wati.io/YOUR_TENANT_ID/api/v1/sendTemplateMessage
+   WATI_AUTH_TOKEN=your_wati_auth_token_here
+   WATI_CHANNEL_NUMBER=your_channel_number
+   WATI_TEMPLATE_NAME=before_booking
    ```
 
 ## 📱 User Flow
@@ -60,9 +60,9 @@ This is a complete clone of the 24sevenrentnow.com car rental website with integ
    - Fill booking form on home page
    - Click "Book Now"
    - On booking page, enter your WhatsApp number (with country code)
-     - Example: +1234567890 or 918688212827
+     - Example: +1234567890 or +919876543210
    - Click "Next Step"
-   - You'll receive a WhatsApp message with your booking ID!
+   - You'll receive a WhatsApp message with your booking details!
 
 ## 📦 Deployment to Vercel
 
@@ -89,10 +89,10 @@ vercel
 When deploying to Vercel, add these in the dashboard:
 
 ```
-WATI_API_URL=https://live-mt-server.wati.io/1027960/api/v1/sendTemplateMessage
-WATI_AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxMzNhYTAyYS0zOWMyLTRmNTMtYmU1NS0yN2E2YzYwOTAzMGIiLCJ1bmlxdWVfbmFtZSI6Impwb3R1cHVyQGdtYWlsLmNvbSIsIm5hbWVpZCI6Impwb3R1cHVyQGdtYWlsLmNvbSIsImVtYWlsIjoianBvdHVwdXJAZ21haWwuY29tIiwiYXV0aF90aW1lIjoiMTAvMDMvMjAyNSAxOTo1OTo1OSIsInRlbmFudF9pZCI6IjEwMjc5NjAiLCJkYl9uYW1lIjoibXQtcHJvZC1UZW5hbnRzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQURNSU5JU1RSQVRPUiIsImV4cCI6MjUzNDAyMzAwODAwLCJpc3MiOiJDbGFyZV9BSSIsImF1ZCI6IkNsYXJlX0FJIn0.4pDO7x8gSDfctDqFg9ytJNTHMXja72aRP7-ZonvPWR8
-WATI_CHANNEL_NUMBER=16056050919
-WATI_TEMPLATE_NAME=confirmbooking
+WATI_API_URL=https://live-mt-server.wati.io/YOUR_TENANT_ID/api/v1/sendTemplateMessage
+WATI_AUTH_TOKEN=your_wati_auth_token_here
+WATI_CHANNEL_NUMBER=your_channel_number
+WATI_TEMPLATE_NAME=before_booking
 NEXT_PUBLIC_BUSINESS_PHONE=+1234567890
 ```
 
@@ -118,8 +118,8 @@ NEXT_PUBLIC_BUSINESS_PHONE=+1234567890
 
 ## 📞 WhatsApp Template
 
-The system uses the `confirmbooking` template in WATI with parameter:
-- Parameter 1: Booking ID (e.g., BK789456)
+The system uses the `before_booking` template in WATI with parameter:
+- Parameter: CustomerName (User's actual name from the booking form)
 
 ## 🎉 Ready to Deploy!
 
